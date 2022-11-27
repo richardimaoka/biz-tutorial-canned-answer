@@ -2,7 +2,6 @@ import Link from "next/link";
 import { useState } from "react";
 import { ConsoleCommand } from "../components/ConsoleCommand";
 import { ConsoleResult } from "../components/ConsoleResult";
-import { YouTubeVideo } from "../components/YouTubeVideo";
 
 export default function Page1() {
   const [isOpen1, setOpen1] = useState(false);
@@ -44,8 +43,6 @@ docker.io/library/nginx:latest`;
         <button onClick={onclick1}>result</button>
       </div>
       {isOpen1 && <ConsoleResult result={result} />}
-
-      <button onClick={onclick3}>commands to see what happened</button>
 
       <div>
         <Link href="./page2">
