@@ -1,47 +1,8 @@
 import Link from "next/link";
-import { FunctionComponent, ReactNode, useState } from "react";
-
-interface ConsoleCommancProps {
-  command: string;
-}
-
-const ConsoleCommand = ({ command }: ConsoleCommancProps) => (
-  <div>
-    <pre style={{ backgroundColor: "#000000d1", padding: "4px" }}>
-      <code style={{ color: "white" }}>{command}</code>
-    </pre>
-  </div>
-);
-
-interface ConsoleResultProps {
-  result: string;
-}
-
-const ConsoleResult = ({ result }: ConsoleResultProps) => (
-  <div>
-    <pre style={{ backgroundColor: "#000000d1", padding: "4px" }}>
-      <code style={{ color: "white" }}>{result}</code>
-    </pre>
-  </div>
-);
-
-interface YouTubeVideoProps {
-  url: string;
-}
-
-const YouTubeVideo = ({ url }: YouTubeVideoProps): JSX.Element => (
-  <div>
-    <iframe
-      width="720"
-      height="315"
-      src={url}
-      title="YouTube video player"
-      frameBorder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowFullScreen
-    ></iframe>
-  </div>
-);
+import { useState } from "react";
+import { ConsoleCommand } from "../components/ConsoleCommand";
+import { ConsoleResult } from "../components/ConsoleResult";
+import { YouTubeVideo } from "../components/YouTubeVideo";
 
 export default function Page1() {
   const [isOpen1, setOpen1] = useState(false);
