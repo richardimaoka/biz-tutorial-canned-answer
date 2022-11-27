@@ -44,15 +44,32 @@ const FoldedYouTubeVideo = ({
     <></>
   );
 
+interface FoldedCommandProps {
+  isOpen: boolean;
+  command: string;
+}
+const FoldedCommand = ({ isOpen, command }: FoldedCommandProps): JSX.Element =>
+  isOpen ? (
+    <pre style={{ backgroundColor: "#000000d1", padding: "4px" }}>
+      <code style={{ color: "white" }}>{command}</code>
+    </pre>
+  ) : (
+    <></>
+  );
+
 export default function About() {
   const [isOpen1, setOpen1] = useState(false);
   const [isOpen2, setOpen2] = useState(false);
+  const [isOpen3, setOpen3] = useState(false);
 
   const onclick1 = () => {
     setOpen1(!isOpen1);
   };
   const onclick2 = () => {
     setOpen2(!isOpen2);
+  };
+  const onclick3 = () => {
+    setOpen3(!isOpen3);
   };
 
   const command = `docker pull nginx`;
@@ -88,6 +105,13 @@ docker.io/library/nginx:latest`;
         isOpen={isOpen2}
         url={"https://www.youtube.com/embed/8ZXU198rL6Q"}
       />
+      <button onClick={onclick3}>commands to see what happened</button>
+      <FoldedCommand
+        isOpen={isOpen3}
+        command="docker images nginx # images with REPOSITORY=nginx"
+      />
+      <FoldedCommand isOpen={isOpen3} command="docker inspect nginx" />
+      <FoldedCommand isOpen={isOpen3} command="docker run --rm nginx" />
     </div>
   );
 }
