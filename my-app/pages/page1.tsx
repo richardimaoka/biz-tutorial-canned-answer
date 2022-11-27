@@ -42,20 +42,11 @@ docker.io/library/nginx:latest`;
       <ConsoleCommand command={command} />
       <div style={{ display: "flex" }}>
         <button onClick={onclick1}>result</button>
-        <button onClick={onclick2}>video</button>
       </div>
       {isOpen1 && <ConsoleResult result={result} />}
-      {isOpen2 && (
-        <YouTubeVideo url={"https://www.youtube.com/embed/8ZXU198rL6Q"} />
-      )}
+
       <button onClick={onclick3}>commands to see what happened</button>
-      {isOpen3 && (
-        <>
-          <ConsoleCommand command="docker images nginx # images with REPOSITORY=nginx" />
-          <ConsoleCommand command="docker inspect nginx" />
-          <ConsoleCommand command="docker run --rm nginx" />
-        </>
-      )}
+
       <div>
         <Link href="./page2">
           <button type="button">next</button>
