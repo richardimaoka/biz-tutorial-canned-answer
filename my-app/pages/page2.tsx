@@ -21,17 +21,19 @@ export default function Page1() {
 
   const command = `docker pull nginx`;
 
-  const result = `Using default tag: latest
-latest: Pulling from library/nginx
-a603fa5e3b41: Pull complete
-c39e1cda007e: Pull complete
-90cfefba34d7: Pull complete
-a38226fb7aba: Pull complete
-62583498bae6: Pull complete
-9802a2cfdb8d: Pull complete
-Digest: sha256:e209ac2f37c70c1e0e9873a5f7231e91dcd83fdf1178d8ed36c2ec09974210ba
-Status: Downloaded newer image for nginx:latest
-docker.io/library/nginx:latest`;
+  const result = `{
+  "Cmd": [
+      "nginx",
+      "-g",
+      "daemon off;"
+  ],
+  "Image": "sha256:60dafcaed78a384237ed956c07eed39793b5f8862195323929417177e3ee9fa7",
+  "Volumes": null,
+  "WorkingDir": "",
+  "Entrypoint": [
+      "/docker-entrypoint.sh"
+  ],
+}`;
 
   return (
     <div style={{ width: "800px" }}>
@@ -39,15 +41,11 @@ docker.io/library/nginx:latest`;
         width="600px"
         src="https://docs.docker.com/engine/images/architecture.svg"
       />
-      <ConsoleCommand command={command} />
+      <ConsoleCommand command={"docker inspect nginx"} />
       <div style={{ display: "flex" }}>
         <button onClick={onclick1}>result</button>
-        <button onClick={onclick2}>video</button>
       </div>
       {isOpen1 && <ConsoleResult result={result} />}
-      {isOpen2 && (
-        <YouTubeVideo url={"https://www.youtube.com/embed/8ZXU198rL6Q"} />
-      )}
       <button onClick={onclick3}>commands to see what happened</button>
       {isOpen3 && (
         <>
@@ -57,6 +55,9 @@ docker.io/library/nginx:latest`;
         </>
       )}
       <div>
+        <Link href="./page1">
+          <button type="button">prev</button>
+        </Link>
         <Link href="./page2">
           <button type="button">next</button>
         </Link>
