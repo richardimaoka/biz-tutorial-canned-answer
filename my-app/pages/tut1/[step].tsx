@@ -1,6 +1,10 @@
 import { GetStaticPaths, GetStaticProps } from "next";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { ParsedUrlQuery } from "node:querystring";
+import { useState } from "react";
+import { ConsoleCommand } from "../../components/ConsoleCommand";
+import { ConsoleResult } from "../../components/ConsoleResult";
 
 interface Props {
   type: "command";
@@ -12,7 +16,7 @@ interface Params extends ParsedUrlQuery {
   step: string;
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths<Params> = async () => {
   return {
     paths: [{ params: { step: "step1" } }],
     fallback: false,
@@ -44,12 +48,40 @@ docker.io/library/nginx:latest`,
 
 const TutorialStep = ({ type, command, result }: Props) => {
   const router = useRouter();
+  const [isOpen1, setOpen1] = useState(false);
+  const [isOpen2, setOpen2] = useState(false);
+  const [isOpen3, setOpen3] = useState(false);
+
+  const onclick1 = () => {
+    setOpen1(!isOpen1);
+  };
+  const onclick2 = () => {
+    setOpen2(!isOpen2);
+  };
+  const onclick3 = () => {
+    setOpen3(!isOpen3);
+  };
+
   const { pid } = router.query;
 
   return (
-    <p>
-      Post: {type}: {command}: {result}
-    </p>
+    <div style={{ width: "800px" }}>
+      <img
+        width="600px"
+        src="https://docs.docker.com/engine/images/architecture.svg"
+      />
+      <ConsoleCommand command={command} />
+      <div style={{ display: "flex" }}>
+        <button onClick={onclick1}>result</button>
+      </div>
+      {isOpen1 && <ConsoleResult result={result} />}
+
+      <div>
+        <Link href="./page2">
+          <button type="button">next</button>
+        </Link>
+      </div>
+    </div>
   );
 };
 export default TutorialStep;
