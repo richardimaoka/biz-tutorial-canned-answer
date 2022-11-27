@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FunctionComponent, ReactNode, useState } from "react";
 
 interface FoldedConsoleResultProps {
   isOpen: boolean;
@@ -56,6 +56,15 @@ const FoldedCommand = ({ isOpen, command }: FoldedCommandProps): JSX.Element =>
   ) : (
     <></>
   );
+
+interface FoldableComponentProps {
+  isOpen: boolean;
+  Component: FunctionComponent;
+}
+
+const FoldableComponent = ({ isOpen, Component }: FoldableComponentProps) => {
+  return <Component />;
+};
 
 export default function About() {
   const [isOpen1, setOpen1] = useState(false);
